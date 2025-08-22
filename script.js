@@ -16,6 +16,7 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+const monsterImage = document.querySelector("#monsterImage"); // 1. Ambil elemen gambar monster
 const weapons = [
   { name: 'stick', power: 5 },
   { name: 'dagger', power: 30 },
@@ -26,17 +27,21 @@ const monsters = [
   {
     name: "slime",
     level: 2,
-    health: 15
+    health: 15,
+    // 2. Tambahkan URL gambar untuk setiap monster
+    image: "./slime.png"
   },
   {
     name: "fanged beast",
     level: 8,
-    health: 60
+    health: 60,
+    image: "./fanged-beast.png"
   },
   {
     name: "dragon",
     level: 20,
-    health: 300
+    health: 300,
+    image: "./dragon.png"
   }
 ]
 const locations = [
@@ -97,6 +102,7 @@ button3.onclick = fightDragon;
 
 function update(location) {
   monsterStats.style.display = "none";
+  monsterImage.style.display = "none"; // 3. Sembunyikan monster saat pindah lokasi
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
   button3.innerText = location["button text"][2];
@@ -182,6 +188,9 @@ function goFight() {
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
+  // 4. Tampilkan gambar monster yang benar
+  monsterImage.src = monsters[fighting].image;
+  monsterImage.style.display = "block";
 }
 
 function attack() {

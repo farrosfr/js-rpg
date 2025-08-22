@@ -61,3 +61,24 @@ button {
 #monsterImage {
   display: none; /* Sembunyikan gambar monster secara default */
 }
+
+/* ... (kode CSS Anda yang sudah ada) ... */
+
+/* TAMBAHKAN KODE DI BAWAH INI */
+#visual {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 200px; /* Atur tinggi area visual */
+  padding: 10px;
+  border-bottom: 1px solid #0a0a23;
+}
+
+#heroImage, #monsterImage {
+  max-width: 150px; /* Atur lebar maksimal gambar */
+  max-height: 150px; /* Atur tinggi maksimal gambar */
+}
+
+#monsterImage {
+  display: none; /* Sembunyikan gambar monster secara default */
+}
