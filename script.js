@@ -15,8 +15,9 @@ const healthText = document.querySelector("#healthText");
 const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
-const monsterHealthText = document.querySelector("#monsterHealth");
 const monsterImage = document.querySelector("#monsterImage"); // 1. Ambil elemen gambar monster
+const heroImage = document.querySelector("#heroImage"); // <-- TAMBAHKAN BARIS INI
+const monsterHealthText = document.querySelector("#monsterHealth");
 const weapons = [
   { name: 'stick', power: 5 },
   { name: 'dagger', power: 30 },
@@ -29,19 +30,19 @@ const monsters = [
     level: 2,
     health: 15,
     // 2. Tambahkan URL gambar untuk setiap monster
-    image: "./slime.png"
+    image: "./images/slime.png"
   },
   {
     name: "fanged beast",
     level: 8,
     health: 60,
-    image: "./fanged-beast.png"
+    image: "./images/fanged-beast.png"
   },
   {
     name: "dragon",
     level: 20,
     health: 300,
-    image: "./dragon.png"
+    image: "./images/dragon.png"
   }
 ]
 const locations = [
@@ -194,6 +195,20 @@ function goFight() {
 }
 
 function attack() {
+    // 1. Tambahkan class untuk memutar animasi
+  heroImage.classList.add("lunge-animation");
+  monsterImage.classList.add("flash-animation");
+
+  // 2. Hapus class setelah animasi selesai agar bisa diputar lagi
+  setTimeout(() => {
+    heroImage.classList.remove("lunge-animation");
+  }, 400); // 400ms = 0.4s (sesuai durasi animasi lunge)
+
+  setTimeout(() => {
+    monsterImage.classList.remove("flash-animation");
+  }, 300); // 300ms = 0.3s (sesuai durasi animasi flash)
+  // -- AKHIR KODE ANIMASI --
+  
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);

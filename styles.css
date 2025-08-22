@@ -82,3 +82,45 @@ button {
 #monsterImage {
   display: none; /* Sembunyikan gambar monster secara default */
 }
+
+/* --- ANIMATION STYLES --- */
+
+/* Keyframes untuk animasi serangan hero */
+@keyframes lunge {
+  0% {
+    transform: translateX(0); /* Posisi awal */
+  }
+  50% {
+    transform: translateX(20px); /* Bergerak 20px ke kanan */
+  }
+  100% {
+    transform: translateX(0); /* Kembali ke posisi awal */
+  }
+}
+
+/* Keyframes untuk animasi monster terkena damage */
+@keyframes damage-flash {
+  0% {
+    filter: brightness(1); /* Kecerahan normal */
+  }
+  50% {
+    filter: brightness(2.5) saturate(2); /* Berkilat terang dan warna lebih pekat */
+  }
+  100% {
+    filter: brightness(1); /* Kembali normal */
+  }
+}
+
+
+/* Class yang akan kita tambahkan/hapus dengan JavaScript */
+.lunge-animation {
+  animation-name: lunge;
+  animation-duration: 0.4s; /* Durasi animasi 0.4 detik */
+  animation-timing-function: ease-out;
+}
+
+.flash-animation {
+  animation-name: damage-flash;
+  animation-duration: 0.3s; /* Durasi animasi 0.3 detik */
+  animation-timing-function: ease-in-out;
+}
