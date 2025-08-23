@@ -8,10 +8,13 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
+// Deklarasikan variabel untuk #game container di atas
+const gameContainer = document.querySelector("#game");
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
 const button3 = document.querySelector("#button3");
 const text = document.querySelector("#text");
+const levelText = document.querySelector("#levelText");
 const xpText = document.querySelector("#xpText");
 const healthText = document.querySelector("#healthText");
 const goldText = document.querySelector("#goldText");
@@ -135,6 +138,7 @@ function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
     health += 10;
+    updateHealthBars(); // Update health bar
     goldText.innerText = gold;
     healthText.innerText = health;
   } else {
@@ -192,6 +196,8 @@ function fightDragon() {
 function goFight() {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
+  updateHealthBars(); // Set bar health monster saat mulai bertarung
+  // Tampilkan elemen monster stats
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
@@ -225,6 +231,12 @@ function attack() {
     if (Math.random() <= 0.1) {
         damage *= 2;
         text.innerText += " CRITICAL HIT!";
+
+        // -- Picu Animasi Guncangan --
+        gameContainer.classList.add("shake-animation");
+        setTimeout(() => {
+          gameContainer.classList.remove("shake-animation");
+        }, 500); // Durasi harus sama dengan di CSS
     }
     
     monsterHealth -= damage;    
@@ -249,8 +261,9 @@ function attack() {
 
   // Di dalam fungsi attack(), setiap kali healthText atau monsterHealthText diupdate:
   // Update juga barnya
-  playerHealthBar.style.width = health + "%";
-  monsterHealthBar.style.width = (monsterHealth / monsters[fighting].health * 100) + "%";
+  //playerHealthBar.style.width = health + "%";
+  //monsterHealthBar.style.width = (monsterHealth / monsters[fighting].health * 100) + "%";
+  updateHealthBars();
 }
 
 function getMonsterAttackValue(level) {
@@ -274,6 +287,7 @@ function checkLevelUp() {
     xpToNextLevel *= 2; // Buat syarat XP berikutnya lebih sulit
     health += 20; // Hadiah naik level: tambah health
     
+    levelText.innerText = level; // <-- UPDATE TAMPILAN LEVEL
     // Beri tahu pemain
     text.innerText += "\n\nCongratulations! You reached level " + level + ".";
     xpText.innerText = xp;
@@ -305,10 +319,15 @@ function restart() {
   gold = 50;
   currentWeapon = 0;
   inventory = ["stick"];
+  level = 1;
+  xpToNextLevel = 15;
+
+  levelText.innerText = level;
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
   goTown();
+  updateHealthBars(); // Reset health bar
 }
 
 function easterEgg() {
@@ -342,6 +361,35 @@ function pick(guess) {
     healthText.innerText = health;
     if (health <= 0) {
       lose();
+    }
+  }
+}
+
+function updateHealthBars() {
+  // Update Player Health Bar
+  let playerHealthPercent = (health / 100) * 100; // Asumsi health maks 100
+  playerHealthBar.style.width = playerHealthPercent + "%";
+  
+  if (playerHealthPercent <= 20) {
+    playerHealthBar.style.backgroundColor = "#c0392b"; // Merah
+  } else if (playerHealthPercent <= 50) {
+    playerHealthBar.style.backgroundColor = "#f1c40f"; // Kuning
+  } else {
+    playerHealthBar.style.backgroundColor = "#2ecc71"; // Hijau
+  }
+
+  // Update Monster Health Bar (hanya jika sedang bertarung)
+  if (fighting !== undefined) {
+    let monsterMaxHealth = monsters[fighting].health;
+    let monsterHealthPercent = (monsterHealth / monsterMaxHealth) * 100;
+    monsterHealthBar.style.width = monsterHealthPercent + "%";
+
+    if (monsterHealthPercent <= 20) {
+      monsterHealthBar.style.backgroundColor = "#c0392b"; // Merah
+    } else if (monsterHealthPercent <= 50) {
+      monsterHealthBar.style.backgroundColor = "#f1c40f"; // Kuning
+    } else {
+      monsterHealthBar.style.backgroundColor = "#2ecc71"; // Hijau
     }
   }
 }
