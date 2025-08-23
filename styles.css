@@ -124,3 +124,15 @@ button {
   animation-duration: 0.3s; /* Durasi animasi 0.3 detik */
   animation-timing-function: ease-in-out;
 }
+
+.health-bar-container {
+  width: 100px;
+  height: 10px;
+  background-color: #e0e0e0;
+  border: 1px solid #0a0a23;
+}
+.health-bar {
+  height: 100%;
+  width: 100%; /* Awalnya penuh */
+  background-color: #2ecc71; /* Warna hijau */
+}

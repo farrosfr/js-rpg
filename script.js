@@ -1,5 +1,7 @@
+let level = 1;
 let xp = 0;
 let health = 100;
+let xpToNextLevel = 15; // Butuh 15 XP untuk ke level 2
 let gold = 50;
 let currentWeapon = 0;
 let fighting;
@@ -95,6 +97,10 @@ const locations = [
     text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
   }
 ];
+
+// Dapatkan elemen bar di atas
+const playerHealthBar = document.querySelector("#playerHealthBar");
+const monsterHealthBar = document.querySelector("#monsterHealthBar");
 
 // initialize buttons
 button1.onclick = goStore;
@@ -208,12 +214,20 @@ function attack() {
     monsterImage.classList.remove("flash-animation");
   }, 300); // 300ms = 0.3s (sesuai durasi animasi flash)
   // -- AKHIR KODE ANIMASI --
-  
+
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
   health -= getMonsterAttackValue(monsters[fighting].level);
   if (isMonsterHit()) {
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
+    let damage = weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;
+  
+    // Tambahkan kesempatan 10% untuk critical hit (damage 2x lipat)
+    if (Math.random() <= 0.1) {
+        damage *= 2;
+        text.innerText += " CRITICAL HIT!";
+    }
+    
+    monsterHealth -= damage;    
   } else {
     text.innerText += " You miss.";
   }
@@ -232,6 +246,11 @@ function attack() {
     text.innerText += " Your " + inventory.pop() + " breaks.";
     currentWeapon--;
   }
+
+  // Di dalam fungsi attack(), setiap kali healthText atau monsterHealthText diupdate:
+  // Update juga barnya
+  playerHealthBar.style.width = health + "%";
+  monsterHealthBar.style.width = (monsterHealth / monsters[fighting].health * 100) + "%";
 }
 
 function getMonsterAttackValue(level) {
@@ -248,12 +267,28 @@ function dodge() {
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 }
 
+function checkLevelUp() {
+  if (xp >= xpToNextLevel) {
+    level++;
+    xp -= xpToNextLevel; // Reset XP setelah naik level
+    xpToNextLevel *= 2; // Buat syarat XP berikutnya lebih sulit
+    health += 20; // Hadiah naik level: tambah health
+    
+    // Beri tahu pemain
+    text.innerText += "\n\nCongratulations! You reached level " + level + ".";
+    xpText.innerText = xp;
+    healthText.innerText = health;
+  }
+}
+
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
   goldText.innerText = gold;
   xpText.innerText = xp;
   update(locations[4]);
+
+  checkLevelUp(); // Panggil fungsi ini setiap kali mengalahkan monster
 }
 
 function lose() {
