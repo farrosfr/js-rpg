@@ -80,7 +80,7 @@ const locations = [
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
     text: "You are fighting a monster.",
-    background: "bg-battle" 
+    //background: "bg-battle" 
   },
   {
     name: "kill monster",
@@ -175,6 +175,10 @@ function update(location) {
 
 function goTown() {
   update(locations[0]);
+  monsterStats.style.display = "none";
+  monsterImage.style.display = "none";
+  // --- PASTIKAN BARIS INI ADA ---
+  monsterImage.classList.remove("dragon-large");
 }
 
 function goStore() {
@@ -250,14 +254,29 @@ function fightDragon() {
 function goFight() {
   update(locations[3]);
   monsterHealth = monsters[fighting].health;
-  updateHealthBars(); // Set bar health monster saat mulai bertarung
-  // Tampilkan elemen monster stats
+  updateHealthBars();
   monsterStats.style.display = "block";
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
-  // 4. Tampilkan gambar monster yang benar
   monsterImage.src = monsters[fighting].image;
   monsterImage.style.display = "block";
+
+  if (fighting === 2) { // fighting === 2 adalah index untuk "dragon"
+    monsterImage.style.display = "none"; // Sembunyikan gambar naga
+  } else {
+    monsterImage.src = monsters[fighting].image;
+    monsterImage.style.display = "block"; // Tampilkan gambar monster lain
+  }
+
+  // 1. Hapus semua class background yang mungkin masih menempel
+  visualContainer.classList.remove("bg-town", "bg-store", "bg-cave", "bg-dragon");
+
+  // 2. Cek monster mana yang dilawan
+  if (fighting === 2) { // fighting === 2 adalah index untuk "dragon"
+    visualContainer.classList.add("bg-dragon"); // Gunakan latar Sarang Naga
+  } else { // Jika bukan naga (berarti slime atau fanged beast)
+    visualContainer.classList.add("bg-cave"); // Gunakan latar Gua
+  }
 }
 
 function attack() {

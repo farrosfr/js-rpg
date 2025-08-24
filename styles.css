@@ -222,6 +222,37 @@ button {
   background-position: center bottom;
 }
 
+/* --- STYLE UNTUK GAMBAR NAGA BESAR --- */
+.dragon-large {
+  width: 100%; 
+  height: auto; 
+  min-height: 100%; 
+  object-fit: contain; 
+  position: inherit;
+  top: 0; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  z-index: 10;
+  background-repeat: no-repeat; 
+  background-position: center bottom; 
+}
+
+.bg-dragon {
+  /* Ganti URL_GAMBAR_SARANG_NAGA dengan URL yang benar */
+  background-image: url('./images/dragon.png'); 
+  
+  /* Pilih salah satu dari dua opsi di bawah ini */
+  
+  /* Opsi A: Mengisi seluruh area (mungkin terpotong) */
+  background-size: cover; 
+  
+  /* Opsi B: Memastikan seluruh gambar terlihat (mungkin ada space kosong) */
+  /* background-size: contain; */
+
+  background-position: center bottom; /* Posisikan di tengah bawah */
+  background-repeat: no-repeat; /* Jangan ulangi gambar */
+}
+
 /* --- FOOTER CREDITS STYLE --- */
 footer {
   margin-top: 20px; /* Beri jarak dari kotak game */
