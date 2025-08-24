@@ -8,6 +8,7 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
+const inventoryContent = document.querySelector("#inventoryContent");
 // Deklarasikan variabel untuk #game container di atas
 const gameContainer = document.querySelector("#game");
 const button1 = document.querySelector('#button1');
@@ -111,6 +112,22 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function updateInventoryScreen() {
+  // Ambil senjata yang sedang dipakai
+  let currentWeaponStats = weapons[currentWeapon];
+
+  // Kosongkan konten sebelumnya
+  inventoryContent.innerHTML = "";
+
+  // Buat konten baru
+  inventoryContent.innerHTML += `<p>Level: <strong>${level}</strong></p>`;
+  inventoryContent.innerHTML += `<p>XP: <strong>${xp} / ${xpToNextLevel}</strong></p>`;
+  inventoryContent.innerHTML += `<p>Health: <strong>${health} / 100</strong></p>`; // Asumsi maks 100
+  inventoryContent.innerHTML += `<p>Gold: <strong>${gold}</strong></p>`;
+  inventoryContent.innerHTML += `<p>Weapon: <strong>${currentWeaponStats.name}</strong></p>`;
+  inventoryContent.innerHTML += `<p>Damage: <strong>${currentWeaponStats.power}</strong></p>`;
+}
+
 function update(location) {
   monsterStats.style.display = "none";
   monsterImage.style.display = "none"; // 3. Sembunyikan monster saat pindah lokasi
@@ -121,6 +138,18 @@ function update(location) {
   button2.onclick = location["button functions"][1];
   button3.onclick = location["button functions"][2];
   text.innerHTML = location.text;
+
+  // --- TAMBAHKAN LOGIKA INI ---
+  if (location.name === "store") {
+    if (currentWeapon < weapons.length - 1) {
+      let nextWeapon = weapons[currentWeapon + 1];
+      button2.innerText = "Buy " + nextWeapon.name + " (30 gold)";
+    } else {
+      button2.innerText = "Sell weapon for 15 gold";
+      button2.onclick = sellWeapon;
+    }
+  }
+  // --- AKHIR DARI LOGIKA TAMBAHAN ---
 }
 
 function goTown() {
@@ -130,16 +159,16 @@ function goTown() {
 function goStore() {
   update(locations[1]);
   // Cek apakah pemain sudah punya senjata terkuat
-  if (currentWeapon < weapons.length - 1) {
-    // Ambil nama dan power senjata BERIKUTNYA
-    let nextWeapon = weapons[currentWeapon + 1];
-    button2.innerText = "Buy " + nextWeapon.name + " (30 gold)";
-    button2.onclick = buyWeapon; // Pastikan fungsinya benar
-  } else {
-    // Jika sudah punya yang terkuat
-    button2.innerText = "Sell weapon for 15 gold";
-    button2.onclick = sellWeapon;
-  }
+  // if (currentWeapon < weapons.length - 1) {
+  //   // Ambil nama dan power senjata BERIKUTNYA
+  //   let nextWeapon = weapons[currentWeapon + 1];
+  //   button2.innerText = "Buy " + nextWeapon.name + " (30 gold)";
+  //   button2.onclick = buyWeapon; // Pastikan fungsinya benar
+  // } else {
+  //   // Jika sudah punya yang terkuat
+  //   button2.innerText = "Sell weapon for 15 gold";
+  //   button2.onclick = sellWeapon;
+  // }
 }
 
 function goCave() {
@@ -156,6 +185,7 @@ function buyHealth() {
   } else {
     text.innerText = "You do not have enough gold to buy health.";
   }
+  updateInventoryScreen(); 
 }
 
 function buyWeapon() {
@@ -172,6 +202,7 @@ function buyWeapon() {
     } else {
       text.innerText = "You do not have enough gold to buy a weapon.";
     }
+    updateInventoryScreen(); 
   } else {
     text.innerText = "You already have the most powerful weapon!";
     button2.innerText = "Sell weapon for 15 gold";
@@ -277,6 +308,7 @@ function attack() {
   //playerHealthBar.style.width = health + "%";
   //monsterHealthBar.style.width = (monsterHealth / monsters[fighting].health * 100) + "%";
   updateHealthBars();
+  updateInventoryScreen(); 
 }
 
 function getMonsterAttackValue(level) {
@@ -316,6 +348,7 @@ function defeatMonster() {
   update(locations[4]);
 
   checkLevelUp(); // Panggil fungsi ini setiap kali mengalahkan monster
+  updateInventoryScreen(); 
 }
 
 function lose() {
@@ -342,6 +375,7 @@ function restart() {
   weaponText.innerText = weapons[0].name; // <-- Reset tampilan senjata
   goTown();
   updateHealthBars(); // Reset health bar
+  updateInventoryScreen(); 
 }
 
 function easterEgg() {
@@ -407,3 +441,5 @@ function updateHealthBars() {
     }
   }
 }
+
+updateInventoryScreen();

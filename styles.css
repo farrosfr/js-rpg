@@ -1,5 +1,19 @@
 body {
   background-color: #0a0a23;
+  /* Tambahkan ini agar kontainer bisa di tengah */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#game-container {
+  /* Atur ukuran total "konsol" game kita */
+  width: 520px;
+  border: 5px solid #555;
+  background-color: #333;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 #text {
@@ -12,9 +26,36 @@ body {
   max-width: 500px;
   max-height: 400px;
   background-color: #ffffff;
-  color: #ffffff;
-  margin: 30px auto 0px;
+  color: #0a0a23; /* Pastikan ini sudah benar */
   padding: 10px;
+  margin: 0;
+}
+
+/* --- STYLE UNTUK LAYAR INVENTARIS BARU --- */
+#inventoryScreen {
+  max-width: 500px;
+  background-color: #0a0a23;
+  color: #ffffff;
+  padding: 10px;  
+  /* margin: 30px auto 0px; */
+  margin-top: 10px; /* Jarak antara dua layar */
+  border: 2px solid #feac32;
+  font-family: monospace; /* Beri kesan retro */
+}
+
+#inventoryScreen h2 {
+  text-align: center;
+  color: #feac32;
+  border-bottom: 1px solid #feac32;
+  padding-bottom: 5px;
+}
+
+#inventoryContent p {
+  margin: 8px 0; /* Beri jarak antar baris */
+}
+
+#inventoryContent strong {
+  color: #2ecc71; /* Warna hijau untuk nilai status */
 }
 
 #controls,
