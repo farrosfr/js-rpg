@@ -1,3 +1,4 @@
+
 body {
   background-color: #0a0a23;
   /* Tambahkan ini agar kontainer bisa di tengah */
@@ -79,7 +80,14 @@ body {
   margin-left: 15px; /* Jarak antara teks dan gambar */
 }
 
-#controls,
+#controls {
+  border: 1px solid #0a0a23;
+  padding: 5px; /* Hapus padding agar tombol bisa mentok */
+  color: #0a0a23;
+  display: flex; /* --- INI KUNCINYA --- */
+}
+
+
 #stats {
   border: 1px solid #0a0a23;
   padding: 5px;
@@ -99,11 +107,11 @@ body {
 }
 
 button {
-  cursor: pointer;
-  color: #0a0a23;
-  background-color: #feac32;
-  background-image: linear-gradient(#fecc4c, #ffac33);
-  border: 3px solid #feac32;
+  border: 1px solid #0a0a23; /* Buat border tipis sebagai pemisah */
+  flex-grow: 1; /* Setiap tombol akan meregang mengisi ruang yang sama */
+  padding: 10px 0; /* Beri sedikit padding vertikal */
+  margin: 0; /* Hapus margin */
+  font-size: 16px; /* Perbesar sedikit font-nya */
 }
 
 #visual {
