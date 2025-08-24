@@ -29,6 +29,7 @@ const weapons = [
   { name: 'claw hammer', power: 50 },
   { name: 'sword', power: 100 }
 ];
+const weaponText = document.querySelector("#weaponText");
 const monsters = [
   {
     name: "slime",
@@ -128,6 +129,17 @@ function goTown() {
 
 function goStore() {
   update(locations[1]);
+  // Cek apakah pemain sudah punya senjata terkuat
+  if (currentWeapon < weapons.length - 1) {
+    // Ambil nama dan power senjata BERIKUTNYA
+    let nextWeapon = weapons[currentWeapon + 1];
+    button2.innerText = "Buy " + nextWeapon.name + " (30 gold)";
+    button2.onclick = buyWeapon; // Pastikan fungsinya benar
+  } else {
+    // Jika sudah punya yang terkuat
+    button2.innerText = "Sell weapon for 15 gold";
+    button2.onclick = sellWeapon;
+  }
 }
 
 function goCave() {
@@ -153,6 +165,7 @@ function buyWeapon() {
       currentWeapon++;
       goldText.innerText = gold;
       let newWeapon = weapons[currentWeapon].name;
+      weaponText.innerText = newWeapon; // <-- UPDATE TAMPILAN SENJATA
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
@@ -326,6 +339,7 @@ function restart() {
   goldText.innerText = gold;
   healthText.innerText = health;
   xpText.innerText = xp;
+  weaponText.innerText = weapons[0].name; // <-- Reset tampilan senjata
   goTown();
   updateHealthBars(); // Reset health bar
 }
