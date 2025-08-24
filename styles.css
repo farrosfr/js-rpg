@@ -50,12 +50,32 @@ body {
   padding-bottom: 5px;
 }
 
+/* UBAH #inventoryContent MENJADI FLEX CONTAINER */
+#inventoryContent {
+  display: flex;
+  justify-content: space-between; /* Memberi jarak antara teks dan gambar */
+  align-items: center; /* Membuat teks dan gambar sejajar di tengah */
+}
+
 #inventoryContent p {
   margin: 8px 0; /* Beri jarak antar baris */
 }
 
 #inventoryContent strong {
   color: #2ecc71; /* Warna hijau untuk nilai status */
+}
+
+.weapon-stats {
+  flex-grow: 1; /* Biarkan bagian teks mengisi ruang yang tersedia */
+}
+
+/* Atur ukuran gambar senjata */
+#weaponImage {
+  width: 80px;  /* Atur lebar gambar */
+  height: 80px; /* Atur tinggi gambar */
+  border: 2px solid #555;
+  background-color: #000;
+  margin-left: 15px; /* Jarak antara teks dan gambar */
 }
 
 #controls,

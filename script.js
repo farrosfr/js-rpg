@@ -25,10 +25,10 @@ const monsterImage = document.querySelector("#monsterImage"); // 1. Ambil elemen
 const heroImage = document.querySelector("#heroImage"); // <-- TAMBAHKAN BARIS INI
 const monsterHealthText = document.querySelector("#monsterHealth");
 const weapons = [
-  { name: 'stick', power: 5 },
-  { name: 'dagger', power: 30 },
-  { name: 'claw hammer', power: 50 },
-  { name: 'sword', power: 100 }
+  { name: 'stick', power: 5, image: './images/stick.png' },
+  { name: 'dagger', power: 30, image: './images/dagger.png' },
+  { name: 'claw hammer', power: 50, image: './images/claw-hammer.png' },
+  { name: 'sword', power: 100, image: './images/sword.png' }
 ];
 const weaponText = document.querySelector("#weaponText");
 const monsters = [
@@ -124,8 +124,17 @@ function updateInventoryScreen() {
   //inventoryContent.innerHTML += `<p>XP: <strong>${xp} / ${xpToNextLevel}</strong></p>`;
   //inventoryContent.innerHTML += `<p>Health: <strong>${health} / 100</strong></p>`; // Asumsi maks 100
   //inventoryContent.innerHTML += `<p>Gold: <strong>${gold}</strong></p>`;
-  inventoryContent.innerHTML += `<p>Weapon: <strong>${currentWeaponStats.name}</strong></p>`;
-  inventoryContent.innerHTML += `<p>Damage: <strong>${currentWeaponStats.power}</strong></p>`;
+  //inventoryContent.innerHTML += `<p>Weapon: <strong>${currentWeaponStats.name}</strong></p>`;
+  //inventoryContent.innerHTML += `<p>Damage: <strong>${currentWeaponStats.power}</strong></p>`;
+
+  // Buat struktur HTML baru
+  inventoryContent.innerHTML = `
+    <div class="weapon-stats">
+      <p>Weapon: <strong>${currentWeaponStats.name}</strong></p>
+      <p>Damage: <strong>${currentWeaponStats.power}</strong></p>
+    </div>
+    <img id="weaponImage" src="${currentWeaponStats.image}" alt="${currentWeaponStats.name}">
+  `;
 }
 
 function update(location) {
