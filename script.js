@@ -120,10 +120,10 @@ function updateInventoryScreen() {
   inventoryContent.innerHTML = "";
 
   // Buat konten baru
-  inventoryContent.innerHTML += `<p>Level: <strong>${level}</strong></p>`;
-  inventoryContent.innerHTML += `<p>XP: <strong>${xp} / ${xpToNextLevel}</strong></p>`;
-  inventoryContent.innerHTML += `<p>Health: <strong>${health} / 100</strong></p>`; // Asumsi maks 100
-  inventoryContent.innerHTML += `<p>Gold: <strong>${gold}</strong></p>`;
+  //inventoryContent.innerHTML += `<p>Level: <strong>${level}</strong></p>`;
+  //inventoryContent.innerHTML += `<p>XP: <strong>${xp} / ${xpToNextLevel}</strong></p>`;
+  //inventoryContent.innerHTML += `<p>Health: <strong>${health} / 100</strong></p>`; // Asumsi maks 100
+  //inventoryContent.innerHTML += `<p>Gold: <strong>${gold}</strong></p>`;
   inventoryContent.innerHTML += `<p>Weapon: <strong>${currentWeaponStats.name}</strong></p>`;
   inventoryContent.innerHTML += `<p>Damage: <strong>${currentWeaponStats.power}</strong></p>`;
 }
@@ -195,7 +195,7 @@ function buyWeapon() {
       currentWeapon++;
       goldText.innerText = gold;
       let newWeapon = weapons[currentWeapon].name;
-      weaponText.innerText = newWeapon; // <-- UPDATE TAMPILAN SENJATA
+      //weaponText.innerText = newWeapon; // <-- UPDATE TAMPILAN SENJATA
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
       text.innerText += " In your inventory you have: " + inventory;
@@ -335,7 +335,7 @@ function checkLevelUp() {
     levelText.innerText = level; // <-- UPDATE TAMPILAN LEVEL
     // Beri tahu pemain
     text.innerText += "\n\nCongratulations! You reached level " + level + ".";
-    xpText.innerText = xp;
+    xpText.innerText = `${xp} / ${xpToNextLevel}`;
     healthText.innerText = health;
   }
 }
@@ -344,7 +344,7 @@ function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
   goldText.innerText = gold;
-  xpText.innerText = xp;
+  xpText.innerText = `${xp} / ${xpToNextLevel}`;
   update(locations[4]);
 
   checkLevelUp(); // Panggil fungsi ini setiap kali mengalahkan monster
@@ -371,8 +371,8 @@ function restart() {
   levelText.innerText = level;
   goldText.innerText = gold;
   healthText.innerText = health;
-  xpText.innerText = xp;
-  weaponText.innerText = weapons[0].name; // <-- Reset tampilan senjata
+  xpText.innerText = `${xp} / ${xpToNextLevel}`;
+  //weaponText.innerText = weapons[0].name; // <-- Reset tampilan senjata
   goTown();
   updateHealthBars(); // Reset health bar
   updateInventoryScreen(); 
@@ -442,4 +442,5 @@ function updateHealthBars() {
   }
 }
 
+xpText.innerText = `${xp} / ${xpToNextLevel}`;
 updateInventoryScreen();
