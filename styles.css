@@ -2,6 +2,7 @@ body {
   background-color: #0a0a23;
   /* Tambahkan ini agar kontainer bisa di tengah */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -215,4 +216,24 @@ button {
   height: 100%;
   width: 100%; /* Awalnya penuh */
   background-color: #2ecc71; /* Warna hijau */
+}
+
+/* --- FOOTER CREDITS STYLE --- */
+footer {
+  margin-top: 20px; /* Beri jarak dari kotak game */
+  text-align: center; /* Posisikan teks di tengah */
+  color: #ffffff; /* Warna teks putih */
+  font-family: monospace; /* Samakan font dengan inventory screen */
+  font-size: 14px;
+}
+
+/* Style untuk link di dalam footer */
+footer a {
+  color: #feac32; /* Warna link kuning-oranye, sama seperti border inventory */
+  text-decoration: none; /* Hilangkan garis bawah default */
+}
+
+/* Efek saat kursor mouse di atas link */
+footer a:hover {
+  text-decoration: underline; /* Munculkan garis bawah saat di-hover */
 }

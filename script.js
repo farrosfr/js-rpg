@@ -442,3 +442,18 @@ function updateHealthBars() {
 
 xpText.innerText = `${xp} / ${xpToNextLevel}`;
 updateInventoryScreen();
+
+// ... (seluruh kode game Anda di atas) ...
+
+// --- LOGIKA UNTUK FOOTER CREDITS ---
+// 1. Ambil elemen <p> dengan ID #credits-text
+const creditsText = document.querySelector("#credits-text");
+
+// 2. Dapatkan tahun saat ini secara dinamis
+const currentYear = new Date().getFullYear();
+
+// 3. Bangun konten HTML untuk kredit
+const creditsContent = `© ${currentYear}. Developed by <a href="https://farrosfr.com" target="_blank">FarrosFR</a>`;
+
+// 4. Masukkan konten ke dalam elemen <p>
+creditsText.innerHTML = creditsContent;
