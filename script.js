@@ -8,6 +8,7 @@ let fighting;
 let monsterHealth;
 let inventory = ["stick"];
 
+const visualContainer = document.querySelector("#visual");
 const inventoryContent = document.querySelector("#inventoryContent");
 // Deklarasikan variabel untuk #game container di atas
 const gameContainer = document.querySelector("#game");
@@ -57,25 +58,29 @@ const locations = [
     name: "town square",
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button functions": [goStore, goCave, fightDragon],
-    text: "You are in the town square. You see a sign that says \"Store\"."
+    text: "You are in the town square. You see a sign that says \"Store\".",
+    background: "bg-town" 
   },
   {
     name: "store",
     "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
     "button functions": [buyHealth, buyWeapon, goTown],
-    text: "You enter the store."
+    text: "You enter the store.",
+    background: "bg-store" 
   },
   {
     name: "cave",
     "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
     "button functions": [fightSlime, fightBeast, goTown],
-    text: "You enter the cave. You see some monsters."
+    text: "You enter the cave. You see some monsters.",
+    background: "bg-cave" 
   },
   {
     name: "fight",
     "button text": ["Attack", "Dodge", "Run"],
     "button functions": [attack, dodge, goTown],
-    text: "You are fighting a monster."
+    text: "You are fighting a monster.",
+    background: "bg-battle" 
   },
   {
     name: "kill monster",
@@ -159,6 +164,13 @@ function update(location) {
     }
   }
   // --- AKHIR DARI LOGIKA TAMBAHAN ---
+
+  visualContainer.classList.remove("bg-town", "bg-store", "bg-cave", "bg-battle");
+
+  // 2. Tambahkan class background yang baru sesuai lokasi
+  if (location.background) {
+    visualContainer.classList.add(location.background);
+  }
 }
 
 function goTown() {

@@ -113,6 +113,7 @@ button {
   height: 200px; /* Atur tinggi area visual */
   padding: 10px;
   border-bottom: 1px solid #0a0a23;
+  transition: background-image 0.5s ease-in-out;
 }
 
 #heroImage, #monsterImage {
@@ -124,28 +125,6 @@ button {
   display: none; /* Sembunyikan gambar monster secara default */
 }
 
-/* ... (kode CSS Anda yang sudah ada) ... */
-
-/* TAMBAHKAN KODE DI BAWAH INI */
-#visual {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  height: 200px; /* Atur tinggi area visual */
-  padding: 10px;
-  border-bottom: 1px solid #0a0a23;
-}
-
-#heroImage, #monsterImage {
-  max-width: 150px; /* Atur lebar maksimal gambar */
-  max-height: 150px; /* Atur tinggi maksimal gambar */
-}
-
-#monsterImage {
-  display: none; /* Sembunyikan gambar monster secara default */
-}
-
-/* --- ANIMATION STYLES --- */
 
 /* Keyframes untuk animasi serangan hero */
 @keyframes lunge {
@@ -218,6 +197,31 @@ button {
   background-color: #2ecc71; /* Warna hijau */
 }
 
+/* Class untuk setiap lokasi */
+.bg-town {
+  background-image: url('./images/bg-town.png') ; /* Ganti dengan URL gambar Town Square */
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.bg-store {
+  background-image: url('./images/bg-store.png'); /* Ganti dengan URL gambar Store */
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.bg-cave {
+  background-image: url('./images/bg-cave.png'); /* Ganti dengan URL gambar Cave */
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.bg-battle {
+  background-image: url('./images/bg-battle.png'); /* Ganti dengan URL gambar Battle Scene */
+  background-size: cover;
+  background-position: center bottom;
+}
+
 /* --- FOOTER CREDITS STYLE --- */
 footer {
   margin-top: 20px; /* Beri jarak dari kotak game */
@@ -237,3 +241,4 @@ footer a {
 footer a:hover {
   text-decoration: underline; /* Munculkan garis bawah saat di-hover */
 }
+
