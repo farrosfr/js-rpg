@@ -158,17 +158,6 @@ function goTown() {
 
 function goStore() {
   update(locations[1]);
-  // Cek apakah pemain sudah punya senjata terkuat
-  // if (currentWeapon < weapons.length - 1) {
-  //   // Ambil nama dan power senjata BERIKUTNYA
-  //   let nextWeapon = weapons[currentWeapon + 1];
-  //   button2.innerText = "Buy " + nextWeapon.name + " (30 gold)";
-  //   button2.onclick = buyWeapon; // Pastikan fungsinya benar
-  // } else {
-  //   // Jika sudah punya yang terkuat
-  //   button2.innerText = "Sell weapon for 15 gold";
-  //   button2.onclick = sellWeapon;
-  // }
 }
 
 function goCave() {
