@@ -2,6 +2,8 @@
 
 ![alt text](image.png)
 
+[![Try the Game](https://img.shields.io/badge/Play_Now-Live_Demo-green?style=for-the-badge&logo=github)](https://farrosfr.github.io/js-rpg/)
+
 Welcome to Dragon Repeller\! This is a classic-style RPG built with HTML, CSS, and vanilla JavaScript. Your mission is to grow stronger, manage your resources, and defeat the dragon that terrorizes the town.
 
 ## Features
